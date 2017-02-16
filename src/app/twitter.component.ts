@@ -18,6 +18,14 @@ export class TwitterComponent{
   home_timeline : any;
   first_level_friends : any;
   drawGraph : boolean;
+  consumerk = {
+    consumerKey: '3dOIpTN6l0g2irhS3WtiZDAHM',
+    consumerSecret: 'jMFMbGzb7GKTEYK1wlRir9QfR891x8j29Z6kXiitRbAKVmBJMn'
+  };
+  tokenk = {
+    token: '827226788195659777-neUaDFJ9d9e0lEJs2EaaQsTeXcGDVPB',
+    tokenSecret: '37Lb5R4KVhl7sBmWSmlwuSC6i6v94B0BAyOlM9HcwpYl8'
+  };
   graphData = {
         nodes: [
           {data: {id: 'hamadvsolutions', name: 'SNACenter', faveColor: '#6FB1FC', faveShape: 'ellipse'}}
@@ -83,14 +91,9 @@ export class TwitterComponent{
       {
         count: 5
       },
-      {
-        consumerKey: '3dOIpTN6l0g2irhS3WtiZDAHM',
-        consumerSecret: 'jMFMbGzb7GKTEYK1wlRir9QfR891x8j29Z6kXiitRbAKVmBJMn'
-      },
-      {
-        token: '827226788195659777-neUaDFJ9d9e0lEJs2EaaQsTeXcGDVPB',
-        tokenSecret: '37Lb5R4KVhl7sBmWSmlwuSC6i6v94B0BAyOlM9HcwpYl8'
-      }
+      this.consumerk
+      ,
+      this.tokenk
   ).subscribe((res)=>{
       this.home_timeline = res.json().map(tweet => tweet.text);
       console.log(this.home_timeline);
@@ -105,14 +108,9 @@ export class TwitterComponent{
         count: 20,
         screen_name : 'hamadvsolutions'
       },
-      {
-        consumerKey: '3dOIpTN6l0g2irhS3WtiZDAHM',
-        consumerSecret: 'jMFMbGzb7GKTEYK1wlRir9QfR891x8j29Z6kXiitRbAKVmBJMn'
-      },
-      {
-        token: '827226788195659777-neUaDFJ9d9e0lEJs2EaaQsTeXcGDVPB',
-        tokenSecret: '37Lb5R4KVhl7sBmWSmlwuSC6i6v94B0BAyOlM9HcwpYl8'
-      }
+      this.consumerk
+      ,
+      this.tokenk
   ).subscribe((res)=>{
       this.first_level_friends = res.json().users;
       console.log(this.first_level_friends);
@@ -124,12 +122,27 @@ export class TwitterComponent{
     for (let i = 0; i < this.first_level_friends.length; i++) {
         this.first_level_friends[i];
         this.graphData.nodes.push({data: {id: this.first_level_friends[i].name, name: 'Jerry', faveColor: '#6FB1FC', faveShape: 'ellipse'}});
-
         this.graphData.edges.push({data: {source: 'hamadvsolutions', target: this.first_level_friends[i].name, faveColor: '#6FB1FC'}});
     }
     console.log(this.graphData.nodes);
     this.drawGraph = true;
   }
 
+  getTrends(){
+    this.clickedContent = "List of friends";
+    this.twitter.get(
+      'https://api.twitter.com/1.1/friends/list.json',
+      {
+        count: 20,
+        screen_name : 'hamadvsolutions'
+      },
+      this.consumerk
+      ,
+      this.tokenk
+  ).subscribe((res)=>{
+      this.first_level_friends = res.json().users;
+      console.log(this.first_level_friends);
+  });
+  }
 
 }
