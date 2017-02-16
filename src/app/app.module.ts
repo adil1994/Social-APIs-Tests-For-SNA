@@ -12,11 +12,13 @@ import {TwitterComponent} from './twitter.component';
 import {ErrorComponent} from './error.component';
 import {HomeComponent} from './home.component';
 import {GraphComponent} from './graph.component';
+import { GogglePlusComponent } from './googleplus.component'
 
 
 const approutes : Routes = [
   {path : 'facebook' , component : FacebookComponent , data : {title : 'Facebook API'}},
   {path : 'twitter' , component : TwitterComponent , data : {title : 'Twitter API'}},
+  {path : 'google-plus' , component : GogglePlusComponent , data : {title : 'Google plus API'}},
   {path : '' , component : HomeComponent , data : {title : 'SNA Graph'}},
   {path : '**' , component : ErrorComponent , data : {title : 'Error 404'}}
 ];
@@ -29,7 +31,8 @@ const approutes : Routes = [
     TwitterComponent,
     ErrorComponent,
     HomeComponent,
-    GraphComponent
+    GraphComponent,
+    GogglePlusComponent,
   ],
   imports: [
     BrowserModule,

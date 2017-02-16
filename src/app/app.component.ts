@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   providers: []
 })
 export class AppComponent {
-  title = 'Facebook API Test ...';
+  title = 'social APIs Tests fro SNA';
   fullname : string;
   picture : string;
   constructor(){
