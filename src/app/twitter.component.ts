@@ -19,6 +19,10 @@ export class TwitterComponent{
   first_level_friends : any;
   drawGraph : boolean;
   trends : any;
+  searchquery : string;
+  searchresults : any;
+  divtoshow : number;
+
   consumerk = {
     consumerKey: '3dOIpTN6l0g2irhS3WtiZDAHM',
     consumerSecret: 'jMFMbGzb7GKTEYK1wlRir9QfR891x8j29Z6kXiitRbAKVmBJMn'
@@ -86,6 +90,7 @@ export class TwitterComponent{
   }
 
   getHomeTimeline(){
+    this.divtoshow = 0;
     this.clickedContent = "Home Timeline";
     this.twitter.get(
       'https://api.twitter.com/1.1/statuses/home_timeline.json',
@@ -102,6 +107,7 @@ export class TwitterComponent{
   }
 
   getFriends(){
+    this.divtoshow = 1;
     this.clickedContent = "List of friends";
     this.twitter.get(
       'https://api.twitter.com/1.1/friends/list.json',
@@ -119,17 +125,8 @@ export class TwitterComponent{
   }
 
 
-  showGraph(){
-    for (let i = 0; i < this.first_level_friends.length; i++) {
-        this.first_level_friends[i];
-        this.graphData.nodes.push({data: {id: this.first_level_friends[i].name, name: 'Jerry', faveColor: '#6FB1FC', faveShape: 'ellipse'}});
-        this.graphData.edges.push({data: {source: 'hamadvsolutions', target: this.first_level_friends[i].name, faveColor: '#6FB1FC'}});
-    }
-    console.log(this.graphData.nodes);
-    this.drawGraph = true;
-  }
-
   getTrends(){
+    this.divtoshow = 2;
     this.clickedContent = "Trends";
     this.twitter.get(
       'https://api.twitter.com/1.1/trends/place.json',
@@ -146,6 +143,32 @@ export class TwitterComponent{
   }
 
   searchTweet(){
+      this.divtoshow = 3;
+      this.clickedContent = "Search : " + this.searchquery;
+      this.twitter.get(
+        'https://api.twitter.com/1.1/search/tweets.json',
+        {
+          q : this.searchquery,
+          count : 10
+        },
+        this.consumerk
+        ,
+        this.tokenk
+    ).subscribe((res)=>{
+        this.searchresults = res.json().statuses;
+        console.log(this.searchresults);
+    });
+  }
 
+  showGraph(){
+    this.clickedContent = "Drawing Graph";
+    this.divtoshow = 4;
+    for (let i = 0; i < this.first_level_friends.length; i++) {
+        this.first_level_friends[i];
+        this.graphData.nodes.push({data: {id: this.first_level_friends[i].name, name: 'Jerry', faveColor: '#6FB1FC', faveShape: 'ellipse'}});
+        this.graphData.edges.push({data: {source: 'hamadvsolutions', target: this.first_level_friends[i].name, faveColor: '#6FB1FC'}});
+    }
+    console.log(this.graphData.nodes);
+    this.drawGraph = true;
   }
 }

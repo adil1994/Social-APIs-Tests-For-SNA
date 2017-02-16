@@ -1,17 +1,16 @@
-<router-outlet></router-outlet>
 <div class="container" style="text-align : center;">
   <h1>
     {{title}}
   </h1>
       <button class="btn btn-info btn-block" (click)="getHomeTimeline()">Home TimeLine</button>
       <button class="btn btn-info btn-block" (click)="getFriends()">Get List of Friends</button>
-      <button class="btn btn-info btn-block" (click)="showGraph()">Draw Graph</button>
       <button class="btn btn-info btn-block" (click)="getTrends()">Get Trends</button>
-      <div class="input-group"><input class="marginalize form-control" style="inline : inline;" placeholder="Enter a query name"/><span class="input-group-btn"><button class="btn btn-info btn-block" (click)="searchTweet()">Tweets Search</button></span></div>
+      <div class="input-group"><input [(ngModel)]="searchquery" class="marginalize form-control" style="inline : inline;" placeholder="Enter a query name"/><span class="input-group-btn"><button class="btn btn-info btn-block" (click)="searchTweet()">Tweets Search</button></span></div>
+      <button class="btn btn-info btn-block" (click)="showGraph()">Draw Graph</button>
 <br>
 
         <h2>{{clickedContent}}</h2>
-        <ul *ngIf="home_timeline" class="list-group">
+        <ul *ngIf="home_timeline && divtoshow == 0 " class="list-group">
           <li class="list-group-item" *ngFor="let tweet of home_timeline">
           <div class="well">
               {{tweet}}
@@ -19,13 +18,13 @@
         </li>
         </ul>
 
-        <ul *ngIf="first_level_friends" class="list-group">
+        <ul *ngIf="first_level_friends && divtoshow == 1 " class="list-group">
           <li class="list-group-item" *ngFor="let friend of first_level_friends">
               {{friend.name}}
           </li>
         </ul>
 
-        <table *ngIf="trends" class="table table-responsive table-bordered">
+        <table *ngIf="trends && divtoshow == 2 " class="table table-responsive table-bordered">
           <thead>
           <tr>
             <th> Name </th>
@@ -39,9 +38,20 @@
         </table>
 
 
-</div>
+        <table *ngIf="searchresults && divtoshow == 3 " class="table table-responsive table-bordered">
+          <thead>
+          <tr>
+            <th> Text </th>
+            <th> user </th>
+          </tr>
+        </thead>
+          <tr *ngFor="let result of searchresults">
+            <td>{{result.text}}</td>
+            <td>{{result.user.name}}</td>
+          </tr>
+        </table>
 
-<div id="helloworld" #helloworld>
+
 </div>
 
 
