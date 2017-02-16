@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { TwitterService } from 'ng2-twitter';
 import { RouterModule, Routes } from '@angular/router';
-
+import {PrettyJsonModule} from 'angular2-prettyjson';
 
 import { AppComponent } from './app.component';
 import { FacebookComponent } from './facebook.component';
@@ -51,6 +51,7 @@ const approutes : Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(approutes),
+    PrettyJsonModule
   ],
   providers: [TwitterService],
   bootstrap: [AppComponent]

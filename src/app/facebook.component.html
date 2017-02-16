@@ -7,16 +7,15 @@
     <button class="btn btn-primary btn-block" (click)="getPicture()">Get Picture</button>
     <button class="btn btn-primary btn-block" (click)="getLikes()">Get Likes</button>
     <button class="btn btn-primary btn-block" (click)="getPosts()">Get Posts</button>
+    <div class="input-group"><input [(ngModel)]="ogpurl" class="marginalize form-control" style="inline : inline;" placeholder="Enter a Url"/><span class="input-group-btn"><button class="btn btn-primary btn-block" (click)="searchOGP()">Facebbok OGP</button></span></div>
   <br>
   <p align="middle"><img class="img-circle" *ngIf="picture" src="{{picture}}" alt="user photo"/></p>
   <h2 style="text-align : center;" *ngIf="fullname">{{fullname}}</h2>
   <hr>
   <h2 *ngIf="likes" style="text-align : center;"> Likes </h2>
   <ul  class="list-group">
-    <li class="list-group-item" *ngFor="let like of likes">
-      <div style="text-align : center;" class="well">
+    <li style="text-align : center;" class="list-group-item" *ngFor="let like of likes">
           {{like.name}}
-      </div>
     </li>
   </ul>
 
@@ -29,5 +28,14 @@
       </div>
     </li>
   </ul>
+
+  <hr>
+  <h2 *ngIf="ogp" style="text-align : center">OGP Search : {{ogpurl}}</h2>
+  <div  *ngIf="ogp" class="well">
+      <pre>
+    {{ogp | json}}
+      </pre>
+  </div>
+
 
 </div>

@@ -7,6 +7,7 @@
       <button class="btn btn-info btn-block" (click)="getFriends()">Get List of Friends</button>
       <button class="btn btn-info btn-block" (click)="getTrends()">Get Trends</button>
       <div class="input-group"><input [(ngModel)]="searchquery" class="marginalize form-control" style="inline : inline;" placeholder="Enter a query name"/><span class="input-group-btn"><button class="btn btn-info btn-block" (click)="searchTweet()">Tweets Search</button></span></div>
+      <div class="input-group"><input [(ngModel)]="tweet_id" class="marginalize form-control" style="inline : inline;" placeholder="Enter a tweet id"/><span class="input-group-btn"><button class="btn btn-info btn-block" (click)="findReTweeters()">Find ReTweeters</button></span></div>
       <button class="btn btn-info btn-block" (click)="showGraph()">Draw Graph</button>
 <br>
 
@@ -52,10 +53,23 @@
           </tr>
         </table>
 
+        <table *ngIf="retweeters && divtoshow == 5 " class="table table-responsive table-bordered">
+          <thead>
+          <tr>
+            <th> Text </th>
+            <th> user </th>
+          </tr>
+        </thead>
+          <tr *ngFor="let retweeter of retweeters ; let retweeter_name of retweeters_names">
+            <td>{{retweeter}}</td>
+            <td>{{retweeter_name}}</td>
+          </tr>
+        </table>
+
 
 </div>
 
 
-<ng2-cytoscape *ngIf="drawGraph" [elements]="graphData" [style]="styles" [layout]="options" ></ng2-cytoscape>
+<ng2-cytoscape *ngIf="drawGraph  && divtoshow == 4" [elements]="graphData" [style]="styles" [layout]="options" ></ng2-cytoscape>
 
 <br><br>
