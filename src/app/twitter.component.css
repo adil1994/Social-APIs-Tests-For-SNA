@@ -7,3 +7,9 @@ ng2-cytoscape {
         margin-left: 150px;
         margin-bottom: 50px;
     }
+.table th {
+       text-align: center;
+}
+.marginalize{
+  margin: 10px;
+}

@@ -18,6 +18,7 @@ export class TwitterComponent{
   home_timeline : any;
   first_level_friends : any;
   drawGraph : boolean;
+  trends : any;
   consumerk = {
     consumerKey: '3dOIpTN6l0g2irhS3WtiZDAHM',
     consumerSecret: 'jMFMbGzb7GKTEYK1wlRir9QfR891x8j29Z6kXiitRbAKVmBJMn'
@@ -129,20 +130,22 @@ export class TwitterComponent{
   }
 
   getTrends(){
-    this.clickedContent = "List of friends";
+    this.clickedContent = "Trends";
     this.twitter.get(
-      'https://api.twitter.com/1.1/friends/list.json',
+      'https://api.twitter.com/1.1/trends/place.json',
       {
-        count: 20,
-        screen_name : 'hamadvsolutions'
+        id: 23424977
       },
       this.consumerk
       ,
       this.tokenk
   ).subscribe((res)=>{
-      this.first_level_friends = res.json().users;
-      console.log(this.first_level_friends);
+      this.trends = res.json()[0].trends;
+      console.log(this.trends);
   });
   }
 
+  searchTweet(){
+
+  }
 }

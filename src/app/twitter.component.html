@@ -6,13 +6,12 @@
       <button class="btn btn-info btn-block" (click)="getHomeTimeline()">Home TimeLine</button>
       <button class="btn btn-info btn-block" (click)="getFriends()">Get List of Friends</button>
       <button class="btn btn-info btn-block" (click)="showGraph()">Draw Graph</button>
-      <button class="btn btn-info btn-block" (click)="getFeed()">Get Feed</button>
       <button class="btn btn-info btn-block" (click)="getTrends()">Get Trends</button>
+      <div class="input-group"><input class="marginalize form-control" style="inline : inline;" placeholder="Enter a query name"/><span class="input-group-btn"><button class="btn btn-info btn-block" (click)="searchTweet()">Tweets Search</button></span></div>
 <br>
-<img class="img-circle" *ngIf="picture" src="{{picture}}" alt="user photo">
 
         <h2>{{clickedContent}}</h2>
-        <ul class="list-group">
+        <ul *ngIf="home_timeline" class="list-group">
           <li class="list-group-item" *ngFor="let tweet of home_timeline">
           <div class="well">
               {{tweet}}
@@ -20,11 +19,25 @@
         </li>
         </ul>
 
-        <ul class="list-group">
+        <ul *ngIf="first_level_friends" class="list-group">
           <li class="list-group-item" *ngFor="let friend of first_level_friends">
               {{friend.name}}
           </li>
         </ul>
+
+        <table *ngIf="trends" class="table table-responsive table-bordered">
+          <thead>
+          <tr>
+            <th> Name </th>
+            <th> Number of Tweets </th>
+          </tr>
+        </thead>
+          <tr *ngFor="let trend of trends">
+            <td>{{trend.name}}</td>
+            <td>{{trend.tweet_volume}}</td>
+          </tr>
+        </table>
+
 
 </div>
 
