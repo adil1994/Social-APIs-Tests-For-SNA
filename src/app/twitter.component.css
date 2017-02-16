@@ -1,0 +1,9 @@
+ng2-cytoscape {
+        height: 200vh;
+        float: left;
+        width: 80%;
+        position: relative;
+        background: lightgrey;
+        margin-left: 150px;
+        margin-bottom: 50px;
+    }

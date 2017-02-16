@@ -1,0 +1,40 @@
+<router-outlet></router-outlet>
+<div class="container">
+  <h1>
+    {{title}}
+  </h1>
+    <button class="btn btn-primary btn-block" (click)="loginFacebook()">Login</button>
+    <button class="btn btn-primary btn-block" (click)="getName()">Get Full Name</button>
+    <button class="btn btn-primary btn-block" (click)="getPicture()">Get Picture</button>
+    <button class="btn btn-primary btn-block" (click)="getLikes()">Get Likes</button>
+    <button class="btn btn-primary btn-block" (click)="getPosts()">Get Posts</button>
+  <br>
+  <p align="middle"><img class="img-circle" *ngIf="picture" src="{{picture}}" alt="user photo"/></p>
+  <h2 style="text-align : center;" *ngIf="fullname">{{fullname}}</h2>
+  <hr>
+  <h2 *ngIf="likes" style="text-align : center;"> Likes </h2>
+  <ul  class="list-group">
+    <li class="list-group-item" *ngFor="let like of likes">
+      <div style="text-align : center;" class="well">
+          {{like.name}}
+      </div>
+    </li>
+  </ul>
+
+  <hr>
+  <h2 *ngIf="posts" style="text-align : center;"> Posts </h2>
+  <ul  class="list-group">
+    <li class="list-group-item" *ngFor="let post of posts">
+      <div style="text-align : center;" class="well">
+          {{post.story}}
+      </div>
+    </li>
+  </ul>
+
+</div>
+<br>
+<hr>
+<div class="container">
+  <a class="btn btn-primary btn-block" routerLink="/" routerLinkActive="active" > Home </a>
+  <a class="btn btn-primary btn-block" routerLink="/twitter" routerLinkActive="active" >Twitter API </a>
+</div>

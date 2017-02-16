@@ -1,0 +1,47 @@
+<router-outlet></router-outlet>
+<div class="container" style="text-align : center;">
+  <h1>
+    {{title}}
+  </h1>
+      <button class="btn btn-info btn-block" (click)="getHomeTimeline()">Home TimeLine</button>
+      <button class="btn btn-info btn-block" (click)="getFriends()">Get List of Friends</button>
+      <button class="btn btn-info btn-block" (click)="showGraph()">Draw Graph</button>
+      <button class="btn btn-info btn-block" (click)="getFeed()">Get Feed</button>
+      <button class="btn btn-info btn-block" (click)="getFeed()">Get Feed</button>
+<br>
+<img class="img-circle" *ngIf="picture" src="{{picture}}" alt="user photo">
+
+        <h2>{{clickedContent}}</h2>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let tweet of home_timeline">
+          <div class="well">
+              {{tweet}}
+          </div>
+        </li>
+        </ul>
+
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let friend of first_level_friends">
+              {{friend.name}}
+          </li>
+        </ul>
+
+</div>
+
+<div id="helloworld" #helloworld>
+</div>
+
+
+<br>
+<hr>
+<div class="container">
+  <a class="btn btn-primary btn-block" routerLink="/" routerLinkActive="active" > Home </a>
+  <a class="btn btn-primary btn-block" routerLink="/facebook" routerLinkActive="active" >Facebook API </a>
+</div>
+<br>
+<br>
+
+
+<ng2-cytoscape *ngIf="drawGraph" [elements]="graphData" [style]="styles" [layout]="options" ></ng2-cytoscape>
+
+<br><br>
