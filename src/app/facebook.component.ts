@@ -15,6 +15,8 @@ export class FacebookComponent {
   posts : any;
   ogp: any;
   ogpurl: any;
+  divtoshow : any;
+
   constructor(private fb: FacebookService){
     let fbParams: FacebookInitParams = {
                                   appId: '1218689591511564',
@@ -52,6 +54,7 @@ export class FacebookComponent {
   }
 
   getLikes() : void{
+      this.divtoshow = 0;
       this.fb.api('/me/likes', "get",  {
             fields: '',
             }).then(
@@ -61,6 +64,7 @@ export class FacebookComponent {
   }
 
   getPosts() : void{
+      this.divtoshow = 1;
       this.fb.api('/me/posts', "get",  {
             fields: '',
             }).then(
@@ -70,6 +74,7 @@ export class FacebookComponent {
   }
 
   searchOGP() : void {
+    this.divtoshow = 2;
     this.fb.api('/'+this.ogpurl+'?metadata=1', "get",  {
           fields: '',
           }).then(

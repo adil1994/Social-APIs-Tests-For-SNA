@@ -8,6 +8,7 @@
       <button class="btn btn-info btn-block" (click)="getTrends()">Get Trends</button>
       <div class="input-group"><input [(ngModel)]="searchquery" class="marginalize form-control" style="inline : inline;" placeholder="Enter a query name"/><span class="input-group-btn"><button class="btn btn-info btn-block" (click)="searchTweet()">Tweets Search</button></span></div>
       <div class="input-group"><input [(ngModel)]="tweet_id" class="marginalize form-control" style="inline : inline;" placeholder="Enter a tweet id"/><span class="input-group-btn"><button class="btn btn-info btn-block" (click)="findReTweeters()">Find ReTweeters</button></span></div>
+      <div class="input-group"><input [(ngModel)]="luserid" class="marginalize form-control" style="inline : inline;" placeholder="Enter a user id"/><span class="input-group-btn"><button class="btn btn-info btn-block" (click)="lookUpUser()">Lookup User</button></span></div>
       <button class="btn btn-info btn-block" (click)="showGraph()">Draw Graph</button>
 <br>
 
@@ -65,6 +66,12 @@
             <td>{{retweeter_name}}</td>
           </tr>
         </table>
+
+        <div style="text-align : left;"  *ngIf="found_user_name && divtoshow == 6" class="well">
+            <pre>
+          {{found_user_name | json}}
+            </pre>
+        </div>
 
 
 </div>
