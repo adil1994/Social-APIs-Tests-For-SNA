@@ -1,7 +1,19 @@
 <div class="container" style="text-align: center;" >
   <div class="col-md-8 col-md-offset-2">
     <div class="row">
-      <h2>welcome to google-plus</h2>
+      <h1>{{title}}</h1>
+      <button id="signin-button" class="btn btn-danger btn-block" (click)="handleSignInClick()">Sign In</button>
+      <button class="btn btn-danger btn-block" (click)="singOut()">Sign Out</button>
+          <button class="btn btn-danger btn-block" (click)="getProfileInfo()">Get profile info</button>
+      <button class="btn btn-danger btn-block" (click)="getActivities()">Get Activities</button>
+      <button class="btn btn-danger btn-block" (click)="getCommentOfAnActivity()">Get comments' Activities</button>
+
+      
+
+
+
+      <hr>
+      <h4>you are signed {{singed}} in</h4>
     </div>
   </div>
 </div>
