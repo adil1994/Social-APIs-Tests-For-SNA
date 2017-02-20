@@ -13,6 +13,10 @@ export class FacebookComponent {
   picture : string;
   likes : any;
   posts : any;
+  ogp: any;
+  ogpurl: any;
+  divtoshow : any;
+
   constructor(private fb: FacebookService){
     let fbParams: FacebookInitParams = {
                                   appId: '1218689591511564',
@@ -50,6 +54,7 @@ export class FacebookComponent {
   }
 
   getLikes() : void{
+      this.divtoshow = 0;
       this.fb.api('/me/likes', "get",  {
             fields: '',
             }).then(
@@ -59,12 +64,23 @@ export class FacebookComponent {
   }
 
   getPosts() : void{
-      this.fb.api('/http://www.imdb.com/title/tt0120338?metadata=1', "get",  {
+      this.divtoshow = 1;
+      this.fb.api('/me/posts', "get",  {
             fields: '',
             }).then(
               (response: any) => { this.posts = response.data; console.log(response);},
               (error: any) => console.error(error)
             )
+  }
+
+  searchOGP() : void {
+    this.divtoshow = 2;
+    this.fb.api('/'+this.ogpurl+'?metadata=1', "get",  {
+          fields: '',
+          }).then(
+            (response: any) => { this.ogp = response; console.log(response);},
+            (error: any) => console.error(error)
+          )
   }
 
 }

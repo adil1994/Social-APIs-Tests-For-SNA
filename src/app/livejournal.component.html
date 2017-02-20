@@ -1,0 +1,12 @@
+
+
+<div class="container" style="text-align : center;">
+  <h1>Live Journal</h1>
+
+  <div class="input-group"><input [(ngModel)]="user_name" class="marginalize form-control" style="inline : inline;" placeholder="Enter a user id"/><span class="input-group-btn"><button class="btn btn-info btn-block" (click)="getUserFriends()">Get Friends</button></span></div>
+  <br><br>
+  <hr>
+  <div style="text-align : left;" class="well">
+          {{ content }}
+  </div>
+</div>

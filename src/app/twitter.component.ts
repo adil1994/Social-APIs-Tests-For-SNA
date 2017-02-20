@@ -22,6 +22,11 @@ export class TwitterComponent{
   searchquery : string;
   searchresults : any;
   divtoshow : number;
+  tweet_id : any;
+  retweeters : any;
+  retweeters_names : any;
+  found_user_name : any;
+  luserid : any;
 
   consumerk = {
     consumerKey: '3dOIpTN6l0g2irhS3WtiZDAHM',
@@ -87,6 +92,7 @@ export class TwitterComponent{
 
   constructor(private twitter: TwitterService){
       this.drawGraph = false;
+      this.retweeters_names = {};
   }
 
   getHomeTimeline(){
@@ -161,6 +167,8 @@ export class TwitterComponent{
     });
   }
 
+
+
   showGraph(){
     this.clickedContent = "Drawing Graph";
     this.divtoshow = 4;
@@ -172,4 +180,63 @@ export class TwitterComponent{
     console.log(this.graphData.nodes);
     this.drawGraph = true;
   }
+
+
+
+  findReTweeters(){
+    this.clickedContent = "Retweeters : " + this.tweet_id;
+    this.divtoshow = 5;
+    this.twitter.get(
+      'https://api.twitter.com/1.1/statuses/retweeters/ids.json',
+      {
+        id : this.tweet_id
+      },
+      this.consumerk
+      ,
+      this.tokenk
+  ).subscribe((res)=>{
+      this.retweeters = res.json().ids;
+      // for (let i = 0; i < this.retweeters.length; i++) {
+      //     this.lookupProfileUserById(this.retweeters[i]);
+      // }
+      console.log(this.retweeters);
+      // console.log(this.retweeters_names);
+  });
+  }
+
+
+  lookupProfileUserById(id : string) {
+    this.twitter.get(
+      'https://api.twitter.com/1.1/users/lookup.json',
+      {
+        user_id : id
+      },
+      this.consumerk
+      ,
+      this.tokenk
+  ).subscribe((res)=>{
+      this.found_user_name = res.json()[0].name;
+      //this.retweeters_names.append(this.found_user_name);
+      console.log(this.found_user_name);
+  });
+  }
+
+
+  lookUpUser(id : string) {
+      this.clickedContent = "Lookup : " + this.luserid;
+      this.divtoshow = 6;
+      this.twitter.get(
+        'https://api.twitter.com/1.1/users/lookup.json',
+        {
+          user_id : this.luserid
+        },
+        this.consumerk
+        ,
+        this.tokenk
+    ).subscribe((res)=>{
+        this.found_user_name = res.json()[0];
+        console.log(this.found_user_name.name);
+    });
+  }
+
 }
