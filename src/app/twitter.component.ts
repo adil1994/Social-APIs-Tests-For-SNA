@@ -122,6 +122,7 @@ export class TwitterComponent{
       this.first_level_friends = res.json().users;
       console.log(this.first_level_friends);
   });
+  
   }
 
 

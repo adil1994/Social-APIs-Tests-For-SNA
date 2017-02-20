@@ -15,7 +15,7 @@ import {GraphComponent} from './graph.component';
 import { GogglePlusComponent } from './googleplus.component'
 
 import {LinkedInComponent} from './linkedin.component';
-
+import { LinkedinService } from './linkedinService.service'
 
 const approutes : Routes = [
   {path : 'facebook' , component : FacebookComponent , data : {title : 'Facebook API'}},
@@ -52,7 +52,7 @@ const approutes : Routes = [
     HttpModule,
     RouterModule.forRoot(approutes),
   ],
-  providers: [TwitterService],
+  providers: [TwitterService, LinkedinService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
